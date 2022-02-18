@@ -10,8 +10,9 @@ This repository contains the documentation for [Image process]() API.
 
 ## 1. Overview
 
-The Image process API provides several functions for processing images, including Flip, Rotate, Conver to grayscale, Resize, Generate a thumbnail, Rotate left, and Rotate right, which accepts four image formats: bmp, jpeg, png, and tiff. Image process API is a JSON-based OAuth2 API. All requests are made to endpoints beginning:
-`https://api.WIP.com/v1`
+The Image process API provides several functions for processing images, including Flip, Rotate, Conver to grayscale, Resize, Generate a thumbnail, Rotate left, and Rotate right, which accepts four image formats: bmp, jpeg, png, and tiff. All requests are made to endpoints beginning:
+
+`https://image-process.azurewebsites.net/api/`
 
 All requests must be secure, i.e. `https`, not `http`.
 
@@ -24,10 +25,8 @@ The API is RESTful and arranged around resources. All requests must be made usin
 
 #### Uploading an image url with operations
 
-This requires multipart form-encoded data.
-
 ```
-POST https://api.WIP.com/v1/processImage?img=&ops=
+POST https://image-process.azurewebsites.net/api/processimage?img=&ops=
 ```
 
 Example request:
@@ -47,13 +46,6 @@ Content-Type: application/json
     "img": "https://i.imgur.com/diyu2YU.jpg",
     "ops": "Flip,0+Resize,50+Grayscale+Rotate,45"
 }
-
---abc123
-Content-Disposition: form-data; name="image"; filename="filename.jpeg"
-Content-Type: image/jpeg
-
-IMAGE_DATA
---abc123--
 ```
 
 With the following fields:
@@ -97,7 +89,7 @@ The response is a binary data stream. Example response:
 ```
 HTTP/1.1 200 OK 
 Last-Modified: Fri, 10 Feb 2012 14:31:06 GMT
-Content-Type: image/jpeg
+Content-Type: image/jpg
 Content-Length: 20331
 Server: WEBrick/1.3.1 (Ruby/1.9.2/2011-02-18)
 Date: Fri, 10 Feb 2012 14:31:22 GMT
