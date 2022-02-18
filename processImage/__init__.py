@@ -49,19 +49,19 @@ def processor(img_url, s):
         ops.append(i)
 
     for op in ops:
-        if(op[0] == 'Flip'):
+        if(op[0].lower() == 'flip'):
             img = Flip(img, int(op[1]))
-        if(op[0] == 'Rotate'):
+        if(op[0].lower() == 'rotate'):
             img = Rotate(img, int(op[1]))
-        if(op[0] == 'Grayscale'):
+        if(op[0].lower() == 'grayscale'):
             img = ConvertToGrayscale(img)
-        if(op[0] == 'Resize'):
+        if(op[0].lower() == 'resize'):
             img = Resize(img, int(op[1]))
-        if(op[0] == 'Thumbnail'):
+        if(op[0].lower() == 'thumbnail'):
             img = GenerateThumbnail(img)
-        if(op[0] == 'RotateL'):
+        if(op[0].lower() == 'rotatel'):
             img = RotateLeft(img)
-        if(op[0] == 'RotateR'):
+        if(op[0].lower() == 'rotater'):
             img = RotateRight(img)
 
     return img
