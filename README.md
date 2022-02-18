@@ -32,8 +32,8 @@ POST https://image-process.azurewebsites.net/api/processimage?img=&ops=
 Example request:
 
 ```
-POST /v1/images HTTP/1.1
-Host: api.WIP.com
+POST /api/processimage?img=&ops= HTTP/1.1
+Host: image-process.azurewebsites.net
 Content-Length: 428
 Content-Type: multipart/form-data; boundary=abc123
 Accept: application/json
@@ -69,7 +69,7 @@ Operations:
 Example operations:
 
 ```
-processImage?img=url&ops=Flip,0+Resize,50+Grayscale+Rotate,45
+processimage?img=url&ops=Flip,0+Resize,50+Grayscale+Rotate,45
 ```
 
 Expected result:
