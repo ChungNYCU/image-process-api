@@ -7,7 +7,7 @@ import urllib.request
 
 
 def flip(img, dir): # Vertically = 0, Horizontally = 1
-    if not(dir==0 or dir==1):
+    if not (dir==0 or dir==1):
         return False
     return cv2.flip(img, dir)
 
@@ -33,7 +33,9 @@ def resize(img, percent): # percent = 1~1000
 
 
 def generate_thumbnail(img):
-    dim = (1280, 720)
+    THUMBNAIL_WIDTH = 1280
+    THUMBNAIL_HEIGHT = 720
+    dim = (THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
     return cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
 
 
@@ -74,10 +76,9 @@ def img_processor(img_url, ops_str):
 
     return img
 
-def numpy_to_binary(arr):
-    is_success, buffer = cv2.imencode(".jpg", arr)
+def numpy_to_binary(img_ext, img_arr):
+    is_success, buffer = cv2.imencode(img_ext, img_arr)
     io_buf = io.BytesIO(buffer)
-    print(type(io_buf))
     return io_buf.read()
  
 
@@ -92,7 +93,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     try:
         if img and ops:
             img = img_processor(img, ops)
-            binary_img = numpy_to_binary(img)
+            binary_img = numpy_to_binary('.' + img_ext, img)
             return func.HttpResponse(binary_img, mimetype = mimetype)
         else:
             return func.HttpResponse(
