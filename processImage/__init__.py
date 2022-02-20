@@ -1,10 +1,10 @@
-import logging
-
 import azure.functions as func
 import cv2
-import urllib.request
-import numpy as np
 import io
+import logging
+import numpy as np
+import urllib.request
+
 
 def Flip(img, dir): # Vertically = 0, Horizontally = 1
     if not(dir==0 or dir==1):
