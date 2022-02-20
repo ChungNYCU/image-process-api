@@ -69,7 +69,7 @@ def img_processor(img_url, ops_str):
             except:
                 return 'The flip operation requires a parameter.'
 
-            if dir==0 or dir==1:
+            if dir == 0 or dir == 1:
                 img = flip(img, dir)
             else:
                 return 'The flip operation only accepts 0 or 1 as a parameter.'
@@ -89,7 +89,7 @@ def img_processor(img_url, ops_str):
             except:
                 return 'The resize operation requires a parameter.'
 
-            if percentage>0 and percentage<=1000:
+            if percentage > 0 and percentage <= 1000:
                 img = resize(img, percentage)
             else:
                 return 'The resize operation only accepts 1 to 1000 as a parameter.'
@@ -100,6 +100,8 @@ def img_processor(img_url, ops_str):
             img = rotate_left(img)
         elif op[0] == 'rotater':
             img = rotate_right(img)
+        elif op[0] == '':
+            continue
         else:
             return op[0] + ' is invalid operation.'
 
@@ -115,27 +117,26 @@ def numpy_to_binary(img_ext, img_arr):
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    img = req.params.get('img')
-    ops = req.params.get('ops')
+    img = req.params.get('img').strip()
+    ops = req.params.get('ops').strip()
     
     if img==None or ops==None:
-        return func.HttpResponse("Image url and operation are required.")
+        return func.HttpResponse("Image url and operation are required.", status_code=400)
 
     try:
         img_ext = img[img.rfind('.')+1:]
         mimetype = "image/" + img_ext
     except:
-        return func.HttpResponse("Image url invalid.")
+        return func.HttpResponse("Image url invalid.", status_code=400)
 
     try:
         img = img_processor(img, ops)
-
-        try:
-            binary_img = numpy_to_binary('.' + img_ext, img)
-        except:
-            return func.HttpResponse(img, status_code=400)
-
-        return func.HttpResponse(binary_img, mimetype = mimetype)
-
     except Exception as e:
-        return func.HttpResponse(str(e), status_code=400)
+        return func.HttpResponse("Image url invalid. " + str(e), status_code=400)
+
+    try:
+        binary_img = numpy_to_binary('.' + img_ext, img)
+    except:
+        return func.HttpResponse(img, status_code=400)
+
+    return func.HttpResponse(binary_img, mimetype = mimetype, status_code=200)
