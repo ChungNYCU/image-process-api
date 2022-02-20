@@ -6,21 +6,24 @@ import numpy as np
 import urllib.request
 
 
-def Flip(img, dir): # Vertically = 0, Horizontally = 1
+def flip(img, dir): # Vertically = 0, Horizontally = 1
     if not(dir==0 or dir==1):
         return False
     return cv2.flip(img, dir)
 
-def Rotate(img, degree):
+
+def rotate(img, degree):
     (h, w) = img.shape[:2]
     (cX, cY) = (w // 2, h // 2)
     M = cv2.getRotationMatrix2D((cX, cY), degree, 1.0)
     return cv2.warpAffine(img, M, (w, h))
 
-def ConvertToGrayscale(img):
+
+def convert_to_grayscale(img):
     return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-def Resize(img, percent): # percent = 1~1000
+
+def resize(img, percent): # percent = 1~1000
     if(percent <= 0 or percent > 1000):
         return False
     width = int(img.shape[1] * percent / 100)
@@ -28,41 +31,46 @@ def Resize(img, percent): # percent = 1~1000
     dim = (width, height)
     return cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
 
-def GenerateThumbnail(img):
+
+def generate_thumbnail(img):
     dim = (1280, 720)
     return cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
 
-def RotateRight(img):
+
+def rotate_right(img):
     return cv2.rotate(img, cv2.cv2.ROTATE_90_CLOCKWISE)
 
-def RotateLeft(img):
+
+def rotate_left(img):
     return cv2.rotate(img, cv2.cv2.ROTATE_90_COUNTERCLOCKWISE)
 
-def processor(img_url, s):
+
+def img_processor(img_url, ops_str):
     ops = []
-    s = s.split(' ')
+    ops_str = ops_str.lower()
+    ops_str = ops_str.split(' ')
     url_response = urllib.request.urlopen(img_url)
     img = cv2.imdecode(np.array(bytearray(url_response.read()), dtype=np.uint8), -1)
 
-    for i in s:
+    for i in ops_str:
         i = i.strip().split(',')
         ops.append(i)
 
     for op in ops:
-        if(op[0].lower() == 'flip'):
-            img = Flip(img, int(op[1]))
-        if(op[0].lower() == 'rotate'):
-            img = Rotate(img, int(op[1]))
-        if(op[0].lower() == 'grayscale'):
-            img = ConvertToGrayscale(img)
-        if(op[0].lower() == 'resize'):
-            img = Resize(img, int(op[1]))
-        if(op[0].lower() == 'thumbnail'):
-            img = GenerateThumbnail(img)
-        if(op[0].lower() == 'rotatel'):
-            img = RotateLeft(img)
-        if(op[0].lower() == 'rotater'):
-            img = RotateRight(img)
+        if(op[0] == 'flip'):
+            img = flip(img, int(op[1]))
+        if(op[0] == 'rotate'):
+            img = rotate(img, int(op[1]))
+        if(op[0] == 'grayscale'):
+            img = convert_to_grayscale(img)
+        if(op[0] == 'resize'):
+            img = resize(img, int(op[1]))
+        if(op[0] == 'thumbnail'):
+            img = generate_thumbnail(img)
+        if(op[0] == 'rotatel'):
+            img = rotate_left(img)
+        if(op[0] == 'rotater'):
+            img = rotate_right(img)
 
     return img
 
@@ -78,11 +86,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     img = req.params.get('img')
     ops = req.params.get('ops')
-    mimetype = "image/" + img[img.rfind('.')+1:]
+    img_ext = img[img.rfind('.')+1:]
+    mimetype = "image/" + img_ext
 
     try:
         if img and ops:
-            img = processor(img, ops)
+            img = img_processor(img, ops)
             binary_img = numpy_to_binary(img)
             return func.HttpResponse(binary_img, mimetype = mimetype)
         else:
