@@ -26,13 +26,13 @@ The API is RESTful and arranged around resources. All requests must be made usin
 #### Uploading an image url with operations
 
 ```
-POST https://image-process.azurewebsites.net/api/processimage?img=&ops=
+GET https://image-process.azurewebsites.net/api/processimage?img=&ops=
 ```
 
 Example request:
 
 ```
-POST /api/processimage?img=&ops= HTTP/1.1
+GET /api/processimage?img=&ops= HTTP/1.1
 Host: image-process.azurewebsites.net
 Content-Length: 428
 Content-Type: multipart/form-data; boundary=abc123
@@ -44,7 +44,7 @@ Content-Disposition: form-data; name="Operations"
 Content-Type: application/json
 {
     "img": "https://i.imgur.com/diyu2YU.jpg",
-    "ops": "Flip,0+Resize,50+Grayscale+Rotate,45"
+    "ops": "Flip,0 Resize,50 Grayscale Rotate,45"
 }
 ```
 
@@ -52,7 +52,7 @@ With the following fields:
 
 | Parameter       | Type         | Required?  | Description                                                    |
 | -------------   |--------------|------------|----------------------------------------------------------------|
-| Operations       | string       | required   | Specify which operation or operations to perform on the image. |
+| Operations      | string       | required   | Specify which operation or operations to perform on the image. |
 
 Operations:
 
@@ -79,11 +79,8 @@ Expected result:
 
 The field name must be `image`. All lines in the body must be terminated with `\r\n`. Only one image may be sent per request. The following image content types are supported:
 
-* `image/bmp`
 * `image/jpeg`
 * `image/png`
-* `image/tiff`
-
 
 The response is a binary data stream. Example response:
 ```
