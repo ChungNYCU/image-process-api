@@ -80,13 +80,19 @@ def numpy_to_binary(img_ext, img_arr):
     is_success, buffer = cv2.imencode(img_ext, img_arr)
     io_buf = io.BytesIO(buffer)
     return io_buf.read()
- 
+
+def raise_exception_msg(msg, status_code=400):
+    return func.HttpResponse(msg, status_code)
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     img = req.params.get('img')
     ops = req.params.get('ops')
+    
+    if not (img and ops):
+        return raise_exception_msg("image url and operation are required")
+
     img_ext = img[img.rfind('.')+1:]
     mimetype = "image/" + img_ext
 
