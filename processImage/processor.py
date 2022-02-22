@@ -65,7 +65,7 @@ def img_processor(img_url, ops_str):
             try:
                 dir = int(op[1])
             except:
-                return 'The flip operation requires a parameter.'
+                return 'The flip operation requires a integer parameter.'
 
             if dir == 0 or dir == 1:
                 img = flip(img, dir)
@@ -76,7 +76,7 @@ def img_processor(img_url, ops_str):
             try:
                 degree = int(op[1])
             except:
-                return 'The rotate operation requires a parameter.'
+                return 'The rotate operation requires a integer parameter.'
 
             img = rotate(img, degree)
         elif op[0] == 'grayscale':
@@ -85,7 +85,7 @@ def img_processor(img_url, ops_str):
             try:
                 percentage = int(op[1])
             except:
-                return 'The resize operation requires a parameter.'
+                return 'The resize operation requires a integer parameter.'
 
             if percentage > 0 and percentage <= 1000:
                 img = resize(img, percentage)
