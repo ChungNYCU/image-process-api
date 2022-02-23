@@ -22,7 +22,7 @@ This repository contains the documentation for [Image process](https://github.co
     - [References](#42-references)
 
 
-## 1. Assumptions and Constraints
+## 1. Considerations
 
 
 #### 1.1 Assumptions
