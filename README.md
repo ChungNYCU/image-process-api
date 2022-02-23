@@ -37,7 +37,10 @@ With the following fields:
 | Operations      | string       | required   | Specify which operation or operations to perform on the image. |
 
 Operations:
-User can utilize below operation options to manipulate their image.
+Users can utilize the operations below to manipulate their images.
+Use ‘,’ (comma) between operation and parameter.
+Use ’ ’ (space) between each operation.
+
 | Operation name  | Parameter?   | Type       | Description                                          |
 | -------------   |--------------|------------|------------------------------------------------------|
 | Flip            | Required     | Int        | Flip the image, 0 for vertical, 1 for horizontal.    |
@@ -98,7 +101,4 @@ Possible errors:
 
 | Error code | Description                                                                                        |
 | -----------|----------------------------------------------------------------------------------------------------|
-| 400        | Request is incorrect or corrupt, and the server can't understand it.                               |
-| 403        | User does not have read permission to the file ID.                                                 |
-| 404        | File ID is not found, or in rare cases the converted image cannot be returned.                     |
-| 415        | File ID is not supported image (jpeg, png, bmp or tiff).                                           |
+| 400        | User error. Request is incorrect or corrupt, and the server can't understand it.                   |
