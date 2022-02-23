@@ -1,6 +1,6 @@
 # Image process API documentation
 
-This repository contains the documentation for [Image process]() API.
+This repository contains the documentation for [Image process](https://github.com/ChungNYCU/image-process-api) API.
 
 #### Contents
 
@@ -23,30 +23,12 @@ The API is RESTful and arranged around resources. All requests must be made usin
 
 ### 2.1. Process image
 
-#### Uploading an image url with operations
+#### Sending an image url with operations
 
 ```
-GET https://image-process.azurewebsites.net/api/processimage?img=&ops=
+GET https://image-process.azurewebsites.net/api/processimage HTTP/1.1
 ```
 
-Example request:
-
-```
-GET /api/processimage?img=&ops= HTTP/1.1
-Host: image-process.azurewebsites.net
-Content-Length: 428
-Content-Type: multipart/form-data; boundary=abc123
-Accept: application/json
-Accept-Charset: utf-8
-
---abc123
-Content-Disposition: form-data; name="Operations"
-Content-Type: application/json
-{
-    "img": "https://i.imgur.com/diyu2YU.jpg",
-    "ops": "Flip,0 Resize,50 Grayscale Rotate,45"
-}
-```
 
 With the following fields:
 
@@ -66,10 +48,10 @@ Operations:
 | RotateL         | Not required | None       | Rotate the image 90 degrees to the left.             |
 | RotateR         | Not required | None       | Rotates the image 90 degrees to the right.           |
 
-Example operations:
+Example URI:
 
 ```
-processimage?img=url&ops=Flip,0+Resize,50+Grayscale+Rotate,45
+https://image-process.azurewebsites.net/api/processimage?img=https://i.imgur.com/IMUhhEQ.jpg&ops=Flip,0
 ```
 
 Expected result:
@@ -79,18 +61,22 @@ Expected result:
 
 The field name must be `image`. All lines in the body must be terminated with `\r\n`. Only one image may be sent per request. The following image content types are supported:
 
+* `image/bmp`
 * `image/jpeg`
+* `image/jpg`
 * `image/png`
+* `image/tiff`
+* `image/tif`
+
 
 The response is a binary data stream. Example response:
 ```
-HTTP/1.1 200 OK 
-Last-Modified: Fri, 10 Feb 2012 14:31:06 GMT
+HTTP/1.1 200 OK
+Transfer-Encoding: chunked
 Content-Type: image/jpg
-Content-Length: 20331
-Server: WEBrick/1.3.1 (Ruby/1.9.2/2011-02-18)
-Date: Fri, 10 Feb 2012 14:31:22 GMT
-Connection: Keep-Alive
+Server: Kestrel
+Request-Context: appId=cid-v1:702721ea-5239-4038-8386-a584b5e1805a
+Date: Wed, 23 Feb 2022 04:07:52 GMT
 ```
 
 Binary data stream example:
