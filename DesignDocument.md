@@ -42,20 +42,20 @@ I decided to use Python because it has good image processing libraries such as O
 
 
 ##### 1.1.4 Image URL or upload image
-I use an image URL instead of uploading an image because I don't want to keep the user's image, so I want users to choose a cloud storage service they trust and provide the image URL to use the image process API.
+I use an image URL instead of uploading an image because I don't want to keep the user's image, so I want users to choose a cloud storage service they trust and provide the image URL to use the image process API. And we can reduce client data transmission.
 
 ##### 1.1.5 GET or POST
 There are three reasons I choose GET, not POST. The first reason is that POST needs to send JSON body, including many data such as images through multipart requests, but my API only accepts an image URL and seven different types of operation, not so complex. The second reason is I do not provide services for uploading pictures; in other words, I do not need to create or update any data in the database. The last reason is that it is more efficient and easy to use GET because you can save a GET request as a bookmark, cache it, or use it in the URL bar.
 
 ##### 1.1.6 Thumbnail operation
-My thumbnail operation can turn an image to YouTube vedio thumbnail.My thumbnail operation can turn an image into a YouTube video thumbnail, which means 1280x720 resolution.
+My thumbnail operation can turn an image to YouTube vedio thumbnail. My thumbnail operation can turn an image into a YouTube video thumbnail, which means 1280x720 resolution.
 
 #### 1.2 Constraints
 
 ##### 1.2.1 Image URL
 Image URL need to be publicly accessible.
 
-##### 1.2.2 Image format
+##### 1.2.2 Image formats
 Only allow users to upload the jpg, jpeg, png, bmp, tiff, and tif image format because my service uses the OpenCV package.
 
 ##### 1.2.3 Image size
@@ -82,7 +82,7 @@ Browser compatibility:
 
 
 #### 2.1 Overview
-This RPC API  deployed on Azure is capable of simply manipulating images. It uses the Chain of Responsibility design pattern from Behavioral Design Patterns.
+This RPC API deployed on Azure is capable of simply manipulating image. It uses the Chain of Responsibility design pattern from Behavioral Design Patterns.
 
 
 #### 2.2 System Context Diagrams
