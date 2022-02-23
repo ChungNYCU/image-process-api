@@ -19,7 +19,7 @@ All requests must be secure, i.e. `https`, not `http`.
 
 ## 2. Resources
 
-The API is RESTful and arranged around resources. All requests must be made using `https`.
+The API is RPC API. All requests must be made using `https`.
 
 ### 2.1. Process image
 
