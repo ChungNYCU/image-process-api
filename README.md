@@ -37,7 +37,7 @@ With the following fields:
 | Operations      | string       | required   | Specify which operation or operations to perform on the image. |
 
 Operations:
-
+User can utilize below operation options to manipulate their image.
 | Operation name  | Parameter?   | Type       | Description                                          |
 | -------------   |--------------|------------|------------------------------------------------------|
 | Flip            | Required     | Int        | Flip the image, 0 for vertical, 1 for horizontal.    |
@@ -51,7 +51,7 @@ Operations:
 Example URI:
 
 ```
-https://image-process.azurewebsites.net/api/processimage?img=https://i.imgur.com/IMUhhEQ.jpg&ops=Flip,0
+https://image-process.azurewebsites.net/api/processimage?img=https://i.imgur.com/IMUhhEQ.jpg&ops=grayscale+rotate,135+flip,1+resize,50
 ```
 
 Expected result:
@@ -59,7 +59,7 @@ Expected result:
 ![](https://i.imgur.com/qy88frp.jpg)
 
 
-The field name must be `image`. All lines in the body must be terminated with `\r\n`. Only one image may be sent per request. The following image content types are supported:
+Accepted image formats:
 
 * `image/bmp`
 * `image/jpeg`
@@ -69,7 +69,7 @@ The field name must be `image`. All lines in the body must be terminated with `\
 * `image/tif`
 
 
-The response is a binary data stream. Example response:
+Example response:
 ```
 HTTP/1.1 200 OK
 Transfer-Encoding: chunked
