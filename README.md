@@ -10,7 +10,7 @@ This repository contains the documentation for [Image process](https://github.co
 
 ## 1. Overview
 
-The Image process API provides several functions for processing images, including Flip, Rotate, Conver to grayscale, Resize, Generate a thumbnail, Rotate left, and Rotate right, which accepts four image formats: bmp, jpeg, png, and tiff. All requests are made to endpoints beginning:
+This Image process API deployed on Azure can provide several functions for processing images, including Flip, Rotate, Conver to grayscale, Resize, Generate a thumbnail, Rotate left, and Rotate right, which accepts four image formats: bmp, jpeg, png, and tiff. All requests are made to endpoints beginning:
 
 `https://image-process.azurewebsites.net/api/`
 
