@@ -13,7 +13,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     try:
         img_ext = img[img.rfind('.')+1:]
-        mimetype = "image/" + img_ext
+        if(img_ext == 'tif'):
+            img_ext = 'tiff'
+            mimetype = "image/" + img_ext
+        else:
+            mimetype = "image/" + img_ext
     except:
         return func.HttpResponse("Image url invalid.", status_code=400)
 
