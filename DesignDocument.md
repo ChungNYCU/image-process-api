@@ -80,7 +80,7 @@ Browser compatibility:
 
 
 #### 2.1 Overview
-This is an RPC API capable of simple manipulation of images. Using the Chain of Responsibility design pattern from Behavioral Design Patterns.
+This RPC API  deployed on Azure is capable of simply manipulating images. It uses the Chain of Responsibility design pattern from Behavioral Design Patterns.
 
 
 #### 2.2 System Context Diagrams
