@@ -47,6 +47,8 @@ I use an image URL instead of uploading an image because I don't want to keep th
 ##### 1.1.5 GET or POST
 There are three reasons I choose GET, not POST. The first reason is that POST needs to send JSON body, including many data such as images through multipart requests, but my API only accepts an image URL and seven different types of operation, not so complex. The second reason is I do not provide services for uploading pictures; in other words, I do not need to create or update any data in the database. The last reason is that it is more efficient and easy to use GET because you can save a GET request as a bookmark, cache it, or use it in the URL bar.
 
+##### 1.1.6 Thumbnail operation
+My thumbnail operation can turn an image to YouTube vedio thumbnail.My thumbnail operation can turn an image into a YouTube video thumbnail, which means 1280x720 resolution.
 
 #### 1.2 Constraints
 
