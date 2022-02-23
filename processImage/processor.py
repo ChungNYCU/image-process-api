@@ -11,8 +11,8 @@ def flip(img, dir): # Vertically = 0, Horizontally = 1
 def rotate(img, degree):
     (h, w) = img.shape[:2]
     (cX, cY) = (w // 2, h // 2)
-    M = cv2.getRotationMatrix2D((cX, cY), degree, 1.0)
-    return cv2.warpAffine(img, M, (w, h))
+    m = cv2.getRotationMatrix2D((cX, cY), degree, 1.0)
+    return cv2.warpAffine(img, m, (w, h))
 
 
 def convert_to_grayscale(img):
