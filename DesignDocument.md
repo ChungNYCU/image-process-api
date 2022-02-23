@@ -11,7 +11,9 @@ This repository contains the documentation for [Image process](https://github.co
     - [Overview](#21-overview)
     - [System Context Diagrams](#22-system-context-diagrams)
     - [Component Diagrams](#23-component-diagrams)
-    - [Deployment Diagrams](#24-deployment-diagrams)
+    - [Sequence Diagrams](#24-sequence-diagrams)
+    - [Deployment Diagrams](#25-deployment-diagrams)
+    - [Little Language](#26-little-language)
 - [Client Design Sample](#3-client-design-sample)
     - [Client Sample 1](#31-client-sample-1)
     - [Client Sample 2](#32-client-sample-2)
@@ -92,6 +94,18 @@ This is an RPC API capable of simple manipulation of images. Using the Chain of 
 #### 2.5 Deployment Diagrams
 ![](https://i.imgur.com/8keANcG.png)
 Source: [Microsoft](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/serverless/web-app)
+
+#### 2.6 Little Language
+Users can utilize the operations below to manipulate their images.
+| Operation name  | Parameter?   | Type       | Description                                          |
+| -------------   |--------------|------------|------------------------------------------------------|
+| Flip            | Required     | Int        | Flip the image, 0 for vertical, 1 for horizontal.    |
+| Rotate          | Required     | Int        | Rotate the image in degrees.                         |
+| Grayscale       | Not required | None       | Converts the image to grayscale.                     |
+| Resize          | Required     | Int        | Resize image by percentage.                          |
+| Thumbnail       | Not required | None       | Generates a thumbnail of the image.                  |
+| RotateL         | Not required | None       | Rotate the image 90 degrees to the left.             |
+| RotateR         | Not required | None       | Rotates the image 90 degrees to the right.           |
 
 
 ## 3 Client Design Sample
