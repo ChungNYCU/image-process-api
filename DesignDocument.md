@@ -101,6 +101,8 @@ Source: [Microsoft](https://docs.microsoft.com/en-us/azure/architecture/referenc
 
 #### 2.6 Little Language
 Users can utilize the operations below to manipulate their images.
+Use ',' (comma) between operation and parameter.
+Use ' ' (space) between each operation.
 | Operation name  | Parameter?   | Type       | Description                                          |
 | -------------   |--------------|------------|------------------------------------------------------|
 | Flip            | Required     | Int        | Flip the image, 0 for vertical, 1 for horizontal.    |
