@@ -37,10 +37,14 @@ When I first designed this RPC API, SRP made me think about the meaning of Singl
 
 The answer I came to was that the operation of the image itself is a kind of Responsibility. Assuming that every operation type on the image is a kind of Responsibility, I will design seven APIs to achieve seven different operations. Then, when the user wants to perform multiple operations on the same image, he needs to call the API separately and then repeatedly send the same image to the server—knowing that the image upload time is much longer than the server processing time. So, I decided to design an API and let the user specify their operations and send it with an image so that I only need to spend the time to upload the image once. Another solution is to temporarily store the image on the server and then use the unique ID to access the image. The seven APIs can also save the time of uploading the image, but I don't want to save the user's image, so I did not use this solution in the end.
 
-##### 1.1.3 Image URL or upload image
+##### 1.1.3 Programming Language
+I decided to use Python because it has good image processing libraries such as OpenCV, Pillow, etc. For the User Interface I decided to use HTML and JavaScript.
+
+
+##### 1.1.4 Image URL or upload image
 I use an image URL instead of uploading an image because I don't want to keep the user's image, so I want users to choose a cloud storage service they trust and provide the image URL to use the image process API.
 
-##### 1.1.4 GET or POST
+##### 1.1.5 GET or POST
 There are three reasons I choose GET, not POST. The first reason is that POST needs to send JSON body, including many data such as images through multipart requests, but my API only accepts an image URL and seven different types of operation, not so complex. The second reason is I do not provide services for uploading pictures; in other words, I do not need to create or update any data in the database. The last reason is that it is more efficient and easy to use GET because you can save a GET request as a bookmark, cache it, or use it in the URL bar.
 
 
