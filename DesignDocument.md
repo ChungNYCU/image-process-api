@@ -85,7 +85,11 @@ This is an RPC API capable of simple manipulation of images. Using the Chain of 
 ![](https://i.imgur.com/lssP2RM.png)
 
 
-#### 2.4 Deployment Diagrams
+#### 2.4 Sequence diagrams
+![](https://i.imgur.com/B8kF7oY.png)
+
+
+#### 2.5 Deployment Diagrams
 ![](https://i.imgur.com/8keANcG.png)
 Source: [Microsoft](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/serverless/web-app)
 
