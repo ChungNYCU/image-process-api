@@ -37,10 +37,10 @@ With the following fields:
 | Operations      | string       | required   | Specify which operation or operations to perform on the image. |
 
 Operations:
-Users can utilize the operations below to manipulate their images.
-Use ‘,’ (comma) between operation and parameter.
-Use ’ ’ (space) between each operation.
-The user can specify which operation or operations to perform on the image. 
+Users can utilize the operations below to manipulate their images.  
+Use ‘,’ (comma) between operation and parameter.  
+Use ’ ’ (space) between each operation.  
+The user can specify which operation or operations to perform on the image.  
 Operations can be applied in an order specified by the caller.
 
 | Operation name  | Parameter?   | Type       | Description                                          |
