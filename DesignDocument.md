@@ -102,11 +102,11 @@ This RPC API deployed on Azure is capable of simply manipulating image. It uses 
 Source: [Microsoft](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/serverless/web-app)
 
 #### 2.6 Little Language
-Users can utilize the operations below to manipulate their images.
-Use ',' (comma) between operation and parameter.
-Use ' ' (space) between each operation.
-The user can specify which operation or operations to perform on the image. 
-Operations can be applied in an order specified by the caller.
+Users can utilize the operations below to manipulate their images.  
+Use ',' (comma) between operation and parameter.  
+Use ' ' (space) between each operation.  
+The user can specify which operation or operations to perform on the image.  
+Operations can be applied in an order specified by the caller.  
 Upon completion of the transform the user can access to the resulting image file. 
 
 | Operation name  | Parameter?   | Type       | Description                                          |
