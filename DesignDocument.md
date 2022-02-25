@@ -7,6 +7,8 @@ This repository contains the documentation for [Image process](https://github.co
 - [Considerations](#1-considerations)
     - [Assumptions](#11-assumptions)
     - [Constraints](#12-constraints)
+    - [System Environment](#13-system-environment)
+    - [Development Environment](#14-development-environment)
 - [Architecture](#2-architecture)
     - [Overview](#21-overview)
     - [System Context Diagrams](#22-system-context-diagrams)
@@ -76,6 +78,21 @@ Browser compatibility:
 | Internet Explorer | Yes          |
 | Opera             | Yes          |
 | Safari            | Yes          |
+
+
+#### 1.4 Development Environment
+You can download source code from [Image process api](https://github.com/ChungNYCU/image-process-api). And utilize `pip install` to install required package.  
+
+Python3 version: 3.9.10
+
+Required package:
+| Package name      | Version      |
+| ------------------|--------------|
+| azure-functions   | 4.x          |
+| numpy             | 1.22.2       |
+| opencv-Python     | 4.5.5.62     |
+| requests          | 2.27.1       |
+| urllib3           | 1.26.8       |
 
 
 ## 2. Architecture
