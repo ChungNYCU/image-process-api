@@ -23,12 +23,31 @@ The API is RPC API. All requests must be made using `https`.
 
 ### 2.1. Process image
 
-#### Sending an image url with operations
+#### Sending an image with operations utilize `multipart/form-data`
 
 ```
-GET https://image-process.azurewebsites.net/api/processimage HTTP/1.1
+POST https://image-process.azurewebsites.net/api/processimage
 ```
 
+Example POST request header and body:
+```
+POST /api/processimage HTTP/1.1
+User-Agent: PostmanRuntime/7.29.0
+Accept: */*
+Cache-Control: no-cache
+Postman-Token: bc0afcb0-782d-4339-af37-9e0be5cc75de
+Host: image-process.azurewebsites.net
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+ 
+----------------------------postman
+Content-Disposition: form-data; name="img"
+<[PROXY]>
+----------------------------postman
+Content-Disposition: form-data; name="ops"
+grayscale+rotate,135+flip,1+resize,50
+----------------------------postman--
+```
 
 With the following fields:
 
@@ -53,10 +72,10 @@ Operations can be applied in an order specified by the caller.
 | RotateL         | Not required | None       | Rotate the image 90 degrees to the left.             |
 | RotateR         | Not required | None       | Rotates the image 90 degrees to the right.           |
 
-Example URI:
+Example operations string:
 
 ```
-https://image-process.azurewebsites.net/api/processimage?img=https://i.imgur.com/IMUhhEQ.jpg&ops=grayscale+rotate,135+flip,1+resize,50
+grayscale rotate,135 flip,1 resize,50
 ```
 
 Expected result:
@@ -78,10 +97,12 @@ Example response:
 ```
 HTTP/1.1 200 OK
 Transfer-Encoding: chunked
-Content-Type: image/jpg
+Content-Type: image/png
 Server: Kestrel
 Request-Context: appId=cid-v1:702721ea-5239-4038-8386-a584b5e1805a
-Date: Wed, 23 Feb 2022 04:07:52 GMT
+Date: Fri, 25 Feb 2022 08:08:39 GMT
+ 
+The console does not support viewing response bodies with media files.
 ```
 
 Binary data stream example:
@@ -104,3 +125,4 @@ Possible errors:
 | Error code | Description                                                                                        |
 | -----------|----------------------------------------------------------------------------------------------------|
 | 400        | User error. Request is incorrect or corrupt, and the server can't understand it.                   |
+| 405        | Wrong http method, use HTTP POST.                                                                  |
