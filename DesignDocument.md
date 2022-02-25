@@ -83,16 +83,16 @@ Browser compatibility:
 #### 1.4 Development Environment
 You can download source code from [Image process api](https://github.com/ChungNYCU/image-process-api). And utilize `pip install` to install required package.  
 
-Python3 version: 3.9.10
+Python3 version: `3.9.10`
 
 Required package:
 | Package name      | Version      |
 | ------------------|--------------|
-| azure-functions   | 4.x          |
-| numpy             | 1.22.2       |
-| opencv-Python     | 4.5.5.62     |
-| requests          | 2.27.1       |
-| urllib3           | 1.26.8       |
+| azure-functions   | `4.x`          |
+| numpy             | `1.22.2`       |
+| opencv-Python     | `4.5.5.62`     |
+| requests          | `2.27.1`       |
+| urllib3           | `1.26.8`       |
 
 
 ## 2. Architecture
