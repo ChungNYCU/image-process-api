@@ -43,28 +43,19 @@ The answer I came to was that the operation of the image itself is a kind of Res
 I decided to use Python because it has good image processing libraries such as OpenCV, Pillow, etc. For the User Interface I decided to use HTML and JavaScript.
 
 
-##### 1.1.4 Image URL or upload image
-I use an image URL instead of uploading an image because I don't want to keep the user's image, so I want users to choose a cloud storage service they trust and provide the image URL to use the image process API. And we can reduce client data transmission.
-
-##### 1.1.5 GET or POST
-There are three reasons I choose GET, not POST. The first reason is that POST needs to send JSON body, including many data such as images through multipart requests, but my API only accepts an image URL and seven different types of operation, not so complex. The second reason is I do not provide services for uploading pictures; in other words, I do not need to create or update any data in the database. The last reason is that it is more efficient and easy to use GET because you can save a GET request as a bookmark, cache it, or use it in the URL bar.
-
-##### 1.1.6 Thumbnail operation
+##### 1.1.4 Thumbnail operation
 My thumbnail operation can turn an image to YouTube vedio thumbnail. My thumbnail operation can turn an image into a YouTube video thumbnail, which means 1280x720 resolution.
 
 #### 1.2 Constraints
 
-##### 1.2.1 Image URL
-Image URL need to be publicly accessible.
-
-##### 1.2.2 Image formats
+##### 1.2.1 Image formats
 Only allow users to upload the jpg, jpeg, png, bmp, tiff, and tif image format because my service uses the OpenCV package.
 
-##### 1.2.3 Image size
+##### 1.2.2 Image size
 The image size recommended under 7,680 x 4,320 pixels.
 
-##### 1.2.4 Number of operations
-Unlimited, but URL length must be less than 2048 characters.
+##### 1.2.3 Number of operations
+Unlimited
 
 
 #### 1.3 System Environment
@@ -88,11 +79,11 @@ Python3 version: `3.9.10`
 Required package:
 | Package name      | Version      |
 | ------------------|--------------|
-| azure-functions   | `4.x`          |
-| numpy             | `1.22.2`       |
-| opencv-Python     | `4.5.5.62`     |
-| requests          | `2.27.1`       |
-| urllib3           | `1.26.8`       |
+| azure-functions   | `4.x`        |
+| numpy             | `1.22.2`     |
+| opencv-Python     | `4.5.5.62`   |
+| requests          | `2.27.1`     |
+| urllib3           | `1.26.8`     |
 
 
 ## 2. Architecture
@@ -103,15 +94,15 @@ This RPC API deployed on Azure is capable of simply manipulating image. It uses 
 
 
 #### 2.2 System Context Diagrams
-![](https://i.imgur.com/AX2lijY.png)
+![](https://i.imgur.com/XQfK1Ef.png)
 
 
 #### 2.3 Component Diagrams
-![](https://i.imgur.com/lssP2RM.png)
+![](https://i.imgur.com/EUq6lQT.png)
 
 
 #### 2.4 Sequence diagrams
-![](https://i.imgur.com/B8kF7oY.png)
+![](https://i.imgur.com/BQRA6pR.png)
 
 
 #### 2.5 Deployment Diagrams
@@ -142,110 +133,122 @@ Upon completion of the transform the user can access to the resulting image file
 
 #### 3.1 Client Sample 1
 
+
 ##### 3.1.1 User Interface:
-![](https://i.imgur.com/rtb4pQa.png)
+![](https://i.imgur.com/xjb7vsD.png)
 
 ##### 3.1.2 Code:
 ```html
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h2>Image processor</h2>
+  <h2>Image processor</h2>
 
-<form action="https://image-process.azurewebsites.net/api/processimage">
-  <label for="img">Image URL:</label><br>
-  <input type="text" id="img" name="img" size="50" value="https://i.imgur.com/IMUhhEQ.jpg"><br>
-  <label for="ops">Process operations:</label><br>
-  <input type="text" id="ops" name="ops" size="50" value="Flip,0"><br><br>
-  <input type="submit" value="Submit">
-</form> 
+  <form method="POST" enctype="multipart/form-data" action="https://image-process.azurewebsites.net/api/processimage">
+    <div class="form-group">
+      <label for="img">File to upload: </label>
+      <input type="file" class="form-control-file" id="img" name="img">
+    </div>
+    <label for="ops">Process operations:</label><br>
+    <input type="text" id="ops" name="ops" size="50" value="Flip,0"><br><br>
+    <input type="submit" value="Submit">
+  </form>
 
-<p>Process operations sample: Flip,0 Resize,50 Grayscale Rotate,45</p>
-<p>If you click the "Submit" button, the form-data will be sent to a page called "https://image-process.azurewebsites.net/api/processimage".</p>
+  <p>Process operations sample: Flip,0 Resize,50 Grayscale Rotate,45</p>
+  <p>If you click the "Submit" button, the form-data will be sent to a page called
+    "https://image-process.azurewebsites.net/api/processimage".</p>
 
 </body>
+
 </html>
 ```
 
 ##### 3.1.3 Demonstration:
-![](https://i.imgur.com/k7Rl8H4.gif)
+![](https://i.imgur.com/wG55TnG.gif)
 
 
 #### 3.2 Client Sample 2
 
+
 ##### 3.2.1 User Interface:
-![](https://i.imgur.com/LInsE5L.png)
+![](https://i.imgur.com/aKBzmE9.png)
 
 ##### 3.2.2 Code:
 ```html
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h2>Image processor</h2>
+    <h2>Image processor</h2>
 
-<form action="https://image-process.azurewebsites.net/api/processimage">
-    <label for="img">Image URL:</label><br>
-    <input type="text" id="img" name="img" size="50" value="https://i.imgur.com/IMUhhEQ.jpg"><br>
+    <form method="POST" enctype="multipart/form-data" action="https://image-process.azurewebsites.net/api/processimage">
+        <div class="form-group">
+            <label for="img">File to upload: </label>
+            <input type="file" class="form-control-file" id="img" name="img">
+        </div>
 
-    Flip:   <input type="text" name="flip" id="flip"><br>
-    Rotate: <input type="text" name="rotate" id="rotate"><br>
-    Resize: <input type="text" name="resize" id="resize"><br>
-    Convert to grayscale: <input type="checkbox" id="grayscale" name="grayscale"><br>
-    Generate a thumbnail: <input type="checkbox" id="thumbnail" name="thumbnail"><br>
-    Rotate left: <input type="checkbox" id="rotatel" name="rotatel"><br>
-    Rotate right:   <input type="checkbox" id="rotater" name="rotater"><br>
-     
-    <button onclick="generate_query_str()">Submit</button>
-    <input type="hidden" id="ops" name="ops" size="50" value="">
-</form> 
-  
-<script>
-    function generate_query_str() {
-        var flip = document.getElementById('flip').value;
-        var rotate = document.getElementById('rotate').value;
-        var resize = document.getElementById('resize').value;
-        var grayscale = document.getElementById('grayscale').checked;
-        var thumbnail = document.getElementById('thumbnail').checked;
-        var rotatel = document.getElementById('rotatel').checked;
-        var rotater = document.getElementById('rotater').checked;
-        var q = ''
-        if(flip){
-            q += 'flip,' + flip + ' '
-        }
-        if(rotate){
-            q += 'rotate,' + rotate + ' '
-        }
-        if(resize){
-            q += 'resize,' + resize + ' '
-        }
-        if(grayscale==true){
-            q += 'grayscale, '
-        }
-        if(thumbnail==true){
-            q += 'thumbnail, '
-        }
-        if(rotatel==true){
-            q += 'rotatel, '
-        }
-        if(rotater==true){
-            q += 'rotater, '
-        }
-        document.getElementById('ops').value = q;
-    }
+        Flip: <input type="text" name="flip" id="flip"><br>
+        Rotate: <input type="text" name="rotate" id="rotate"><br>
+        Resize: <input type="text" name="resize" id="resize"><br>
+        Convert to grayscale: <input type="checkbox" id="grayscale" name="grayscale"><br>
+        Generate a thumbnail: <input type="checkbox" id="thumbnail" name="thumbnail"><br>
+        Rotate left: <input type="checkbox" id="rotatel" name="rotatel"><br>
+        Rotate right: <input type="checkbox" id="rotater" name="rotater"><br>
 
-</script>
+        <button onclick="generate_query_str()">Submit</button>
+        <input type="hidden" id="ops" name="ops" size="50" value="">
+    </form>
 
-<p>Flip only accept 0 = vertically or 1 = horizontally, resize only accept 1~1000</p>
-<p>If you click the "Submit" button, the form-data will be sent to a page called "https://image-process.azurewebsites.net/api/processimage".</p>
+    <script>
+        function generate_query_str() {
+            var flip = document.getElementById('flip').value;
+            var rotate = document.getElementById('rotate').value;
+            var resize = document.getElementById('resize').value;
+            var grayscale = document.getElementById('grayscale').checked;
+            var thumbnail = document.getElementById('thumbnail').checked;
+            var rotatel = document.getElementById('rotatel').checked;
+            var rotater = document.getElementById('rotater').checked;
+            var q = ' '
+            if (flip) {
+                q += 'flip,' + flip + ' '
+            }
+            if (rotate) {
+                q += 'rotate,' + rotate + ' '
+            }
+            if (resize) {
+                q += 'resize,' + resize + ' '
+            }
+            if (grayscale == true) {
+                q += 'grayscale, '
+            }
+            if (thumbnail == true) {
+                q += 'thumbnail, '
+            }
+            if (rotatel == true) {
+                q += 'rotatel, '
+            }
+            if (rotater == true) {
+                q += 'rotater, '
+            }
+            document.getElementById('ops').value = q;
+        }
+
+    </script>
+
+    <p>Flip only accept 0 = vertically or 1 = horizontally, resize only accept 1~1000</p>
+    <p>If you click the "Submit" button, the form-data will be sent to a page called
+        "https://image-process.azurewebsites.net/api/processimage".</p>
 
 </body>
+
 </html>
 ```
 
 ##### 3.2.3 Demonstration:
-![](https://i.imgur.com/lHUm4Vs.gif)
+![](https://i.imgur.com/fmIBrYx.gif)
 
 
 ## 4 Appendices and References
