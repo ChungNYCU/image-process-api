@@ -4,7 +4,7 @@ import numpy as np
 import urllib.request
 
 
-def flip(img, dir): # Vertically = 0, Horizontally = 1
+def flip(img, dir):  # Vertically = 0, Horizontally = 1
     return cv2.flip(img, dir)
 
 
@@ -19,18 +19,18 @@ def convert_to_grayscale(img):
     return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 
-def resize(img, percent): # percent = 1~1000
+def resize(img, percent):  # percent = 1~1000
     width = int(img.shape[1] * percent / 100)
     height = int(img.shape[0] * percent / 100)
     dim = (width, height)
-    return cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
+    return cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
 
 
 def generate_thumbnail(img):
     THUMBNAIL_WIDTH = 1280
     THUMBNAIL_HEIGHT = 720
     dim = (THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
-    return cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
+    return cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
 
 
 def rotate_right(img):
@@ -41,21 +41,16 @@ def rotate_left(img):
     return cv2.rotate(img, cv2.cv2.ROTATE_90_COUNTERCLOCKWISE)
 
 
-def img_processor(img_url, ops_str):
+def img_processor(img, ops_str):
     ops = []
     ops_str = ops_str.lower()
     ops_str = ops_str.split(' ')
 
     try:
-        url_response = urllib.request.urlopen(img_url)
-    except Exception as e:
-        return "Url open failed:" + str(e)
-    
-    try:
-        img = cv2.imdecode(np.array(bytearray(url_response.read()), dtype=np.uint8), -1)
+        img = cv2.imdecode(np.array(bytearray(img), dtype=np.uint8), -1)
     except Exception as e:
         return "Image decode failed:" + str(e)
-    
+
     for i in ops_str:
         i = i.strip().split(',')
         ops.append(i)
