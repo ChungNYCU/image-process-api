@@ -27,8 +27,8 @@ def resize(img, percent):  # percent = 1~1000
 
 
 def generate_thumbnail(img):
-    THUMBNAIL_WIDTH = 1280
-    THUMBNAIL_HEIGHT = 720
+    THUMBNAIL_WIDTH = 320
+    THUMBNAIL_HEIGHT = 320
     dim = (THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
     return cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
 
